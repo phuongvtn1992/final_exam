@@ -95,11 +95,41 @@ pipeline {
                 sh './jenkins/push/push.sh All'
             }
         }
-        /*stage('Deploy') {
-            //agent {label 'node1'}
-            steps {
-                sh './pipeline6/jenkins/deploy/deploy.sh'
+        stage('Deploy NodeJS') {
+            agent {label 'ubuntu'}
+	    when {
+                expression { 
+                    params.BUILD_APP == 'NodeJS'
+                }
             }
-        }*/
+            steps {
+		echo "Deploy NodeJS Img"
+                sh './jenkins/push/push.sh NodeJS'
+            }
+        }
+	stage('Deploy Python') {
+            agent {label 'ubuntu'}
+	    when {
+                expression { 
+                    params.BUILD_APP == 'Python'
+                }
+            }
+            steps {
+		echo "Deploy NodeJS Img"
+                sh './jenkins/push/push.sh Python'
+            }
+        }
+	stage('Deploy All') {
+            agent {label 'ubuntu'}
+	    when {
+                expression { 
+                    params.BUILD_APP == 'All'
+                }
+            }
+            steps {
+		echo "Deploy NodeJS Img"
+                sh './jenkins/push/push.sh All'
+            }
+        }
     }
 }
