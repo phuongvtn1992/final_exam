@@ -8,11 +8,10 @@ echo "****************************"
 echo "Value: $@"
 if [ $@ = "NodeJS" ]
 then
-   cd $WORKSPACE/node-hello && docker build -t nodejsapp:latest .
+   cd $WORKSPACE/node-hello && docker image rm nodejsapp:latest && docker build -t nodejsapp:latest .
 elif [ $@ = "Python" ]
 then
-   cd $WORKSPACE/b9-python-app && docker build -t pythonapp:latest .
+   cd $WORKSPACE/b9-python-app && docker image rm pythonapp:latest && docker build -t pythonapp:latest .
 else
-   #cd node-hello && docker build -t nodejsapp:latest . && cd .. && cd b9-python-app && docker build -t pythonapp:latest .
    echo "Not buid anything"
 fi	
