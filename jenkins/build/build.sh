@@ -12,6 +12,10 @@ then
 elif [ $@ = "Python" ]
 then
    cd $WORKSPACE/b9-python-app && docker image rm pythonapp:latest && docker build -t pythonapp:latest .
+elif [ $@ = "All" ]
+then
+   cd $WORKSPACE/node-hello && docker image rm nodejsapp:latest && docker build -t nodejsapp:latest .
+   cd $WORKSPACE/b9-python-app && docker image rm pythonapp:latest && docker build -t pythonapp:latest .
 else
    echo "Not buid anything"
 fi	
