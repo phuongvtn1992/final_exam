@@ -67,7 +67,7 @@ pipeline {
                 }
             }
             steps {
-                echo "Build Node"
+                echo "Push Node Img"
                 sh './jenkins/build/build.sh NodeJS'
             }
         }
