@@ -4,22 +4,17 @@ echo "****************************"
 echo "** Building Docker Image ***"
 echo "****************************"
 echo "Value: $@"
-check_img_exist(){
-  if [[ "$(docker images -q $1 2> /dev/null)" != "" ]]; then
-    docker image rm $1
-  fi
-}
   
 if [ $@ = "NodeJS" ]
 then
-   cd $WORKSPACE/node-hello && check_img_exist nodejsapp:latest && docker build -t nodejsapp:latest .
+   cd $WORKSPACE/node-hello && docker build -t nodejsapp:$BUILD_TAG .
 elif [ $@ = "Python" ]
 then
-   cd $WORKSPACE/b9-python-app && check_img_exist pythonapp:latest && docker build -t pythonapp:latest .
+   cd $WORKSPACE/b9-python-app && docker build -t pythonapp:$BUILD_TAG .
 elif [ $@ = "All" ]
 then
-   cd $WORKSPACE/node-hello && check_img_exist nodejsapp:latest && docker build -t nodejsapp:latest .
-   cd $WORKSPACE/b9-python-app && check_img_exist pythonapp:latest && docker build -t pythonapp:latest .
+   cd $WORKSPACE/node-hello && docker build -t nodejsapp:$BUILD_TAG .
+   cd $WORKSPACE/b9-python-app && docker build -t pythonapp:$BUILD_TAG .
 else
    echo "Not buid anything"
 fi	
