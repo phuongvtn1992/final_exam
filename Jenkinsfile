@@ -55,16 +55,42 @@ pipeline {
                     junit 'pipeline6/java-app/target/surefire-reports/*.xml'
                 }
             }
-        }
+        }*/
 
-        stage('Push') {
-            //agent {label 'master'}
+        stage('Push NodeJS Img') {
+            when {
+                expression { 
+                    params.BUILD_APP == 'NodeJS'
+                }
+            }
             steps {
-                sh './pipeline6/jenkins/push/push.sh'
+                echo "Build Node"
+                sh './jenkins/build/build.sh NodeJS'
             }
         }
-
-        stage('Deploy') {
+        stage('Push Python Img') {
+            when {
+                expression { 
+                    params.BUILD_APP == 'Python'
+                }
+            }
+            steps {
+                echo "Push Python Img"
+                sh './jenkins/build/build.sh Python'
+            }
+        }
+        stage('Push All Img') {
+            when {
+                expression { 
+                    params.BUILD_APP == 'All'
+                }
+            }
+            steps {
+                echo "Push All Img"
+                sh './jenkins/build/build.sh All'
+            }
+        }
+        /*stage('Deploy') {
             //agent {label 'node1'}
             steps {
                 sh './pipeline6/jenkins/deploy/deploy.sh'
