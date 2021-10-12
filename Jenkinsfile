@@ -13,7 +13,7 @@ pipeline {
 	stage('Buid NodeJS') {
             when {
                 expression { 
-                    params.BUILD_APP == 'NodeJS' || params.BUILD_APP == 'All'
+                    params.BUILD_APP == 'NodeJS'
                 }
             }
             steps {
@@ -24,7 +24,7 @@ pipeline {
         stage('Buid Python') {
             when {
                 expression { 
-                    params.BUILD_APP == 'Python' || params.BUILD_APP == 'All'
+                    params.BUILD_APP == 'Python'
                 }
             }
             steps {
@@ -32,17 +32,19 @@ pipeline {
                 sh './jenkins/build/build.sh Python'
             }
         }
-        /*stage('Build') {
-            //agent {label 'master'}
+        stage('Build All') {
+            when {
+                expression { 
+                    params.BUILD_APP == 'All'
+                }
+            }
             steps {
-                sh '''
-                    ./final_exam/jenkins/build/clone_repo.sh
-                    ./final_exam/jenkins/build/build.sh ${params.BUILD_APP}
-                '''
+                echo "Build All"
+                sh './jenkins/build/build.sh All'
             }
         }
 
-        stage('Test') {
+        /*stage('Test') {
             //agent {label 'master'}
             steps {
                 sh './pipeline6/jenkins/test/mvn.sh mvn test'
