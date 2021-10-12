@@ -45,12 +45,20 @@ prepare_image_for_app(){
 
 case $@ in
   NodeJS)
-    prepare_image_for_app phuongvo1992/nodejsapp:latest
+#    prepare_image_for_app phuongvo1992/nodejsapp:latest
+    remove_container_exist phuongvo1992/nodejsapp:latest
+    remove_img_exist phuongvo1992/nodejsapp:latest
+    docker pull phuongvo1992/nodejsapp:latest
+    get_tag_image phuongvo1992/nodejsapp:latest
     echo "*** Running Nodeapp ***"
     docker run -p 3000:3000 -e APP_TYPE=Nodejs -e HOSTNAME=$HOST_NAME -e APP_VERSION=$APP_VER -d phuongvo1992/nodejsapp:latest
     ;;
   Python)
-    prepare_image_for_app phuongvo1992/pythonapp:latest
+#    prepare_image_for_app phuongvo1992/pythonapp:latest
+    remove_container_exist phuongvo1992/pythonapp:latest
+    remove_img_exist phuongvo1992/pythonapp:latest
+    docker pull phuongvo1992/pythonapp:latest
+    get_tag_image phuongvo1992/pythonapp:latest
     echo "*** Running Nodeapp ***"
     docker run -p 5000:5000 -e APP_TYPE=Python -e HOSTNAME=$HOST_NAME -e APP_VERSION=$APP_VER -d phuongvo1992/pythonapp:latest
     ;;
