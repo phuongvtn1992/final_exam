@@ -18,7 +18,7 @@ pipeline {
             }
             steps {
                 echo "Build Node"
-                ./final_exam/jenkins/build/build.sh NodeJS
+                sh './final_exam/jenkins/build/build.sh NodeJS'
             }
         }
         stage('Buid Python') {
@@ -29,7 +29,7 @@ pipeline {
             }
             steps {
                 echo "Build Python"
-                ./final_exam/jenkins/build/build.sh Python
+                sh './final_exam/jenkins/build/build.sh Python'
             }
         }
         /*stage('Build') {
