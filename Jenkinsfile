@@ -104,7 +104,7 @@ pipeline {
             }
             steps {
 		echo "Deploy NodeJS Img"
-                sh './jenkins/push/push.sh NodeJS'
+                sh './jenkins/deploy/deploy.sh NodeJS'
             }
         }
 	stage('Deploy Python') {
@@ -116,7 +116,7 @@ pipeline {
             }
             steps {
 		echo "Deploy NodeJS Img"
-                sh './jenkins/push/push.sh Python'
+                sh './jenkins/deploy/deploy.sh Python'
             }
         }
 	stage('Deploy All') {
@@ -128,7 +128,7 @@ pipeline {
             }
             steps {
 		echo "Deploy NodeJS Img"
-                sh './jenkins/push/push.sh All'
+                sh './jenkins/deploy/deploy.sh All'
             }
         }
     }
