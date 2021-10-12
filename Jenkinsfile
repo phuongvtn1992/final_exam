@@ -1,7 +1,6 @@
 pipeline {
-    //test trigger
-    //agent none
-    agent {label 'master'}
+    agent none
+    //agent {label 'master'}
     parameters {
         choice(name: 'BUILD_APP', choices: ['All', 'NodeJS', 'Python'], description: 'Please choose type of this build')
     }
@@ -11,6 +10,7 @@ pipeline {
 
     stages {
 	stage('Buid NodeJS') {
+            agent {label 'master'}
             when {
                 expression { 
                     params.BUILD_APP == 'NodeJS'
@@ -22,6 +22,7 @@ pipeline {
             }
         }
         stage('Buid Python') {
+            agent {label 'master'}
             when {
                 expression { 
                     params.BUILD_APP == 'Python'
@@ -33,6 +34,7 @@ pipeline {
             }
         }
         stage('Build All') {
+	    agent {label 'master'}
             when {
                 expression { 
                     params.BUILD_APP == 'All'
@@ -58,6 +60,7 @@ pipeline {
         }*/
 
         stage('Push NodeJS Img') {
+	    agent {label 'master'}
             when {
                 expression { 
                     params.BUILD_APP == 'NodeJS'
@@ -69,6 +72,7 @@ pipeline {
             }
         }
         stage('Push Python Img') {
+	    agent {label 'master'}
             when {
                 expression { 
                     params.BUILD_APP == 'Python'
@@ -80,6 +84,7 @@ pipeline {
             }
         }
         stage('Push All Img') {
+	    agent {label 'master'}
             when {
                 expression { 
                     params.BUILD_APP == 'All'
